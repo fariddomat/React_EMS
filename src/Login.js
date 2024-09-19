@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import api from './api';  // Import Axios instance
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -14,7 +14,8 @@ const Login = () => {
     try {
       const response = await api.post('/login', { email, password });
       localStorage.setItem('token', response.data.token);  // Save the token
-      navigate('/dashboard');  // Redirect after successful login
+      onLogin();  // Call the onLogin function to update parent state
+      navigate('/');  // Redirect after successful login
     } catch (err) {
       setError('Invalid credentials, please try again.');
     }

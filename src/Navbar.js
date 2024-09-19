@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, onLogout }) => {
   return (
     <header className="header fixed-top">
       <div className="topbar d-flex align-items-center">
@@ -27,6 +27,11 @@ const Navbar = () => {
               <li><Link to="/events">Events</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact-us">Contact Us</Link></li>
+              {isLoggedIn ? (
+                <li><Link to="/" onClick={onLogout}>Logout</Link></li>
+              ) : (
+                <li><Link to="/login">Login</Link></li>
+              )}
             </ul>
             <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
           </nav>
