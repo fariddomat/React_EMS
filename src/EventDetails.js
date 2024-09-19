@@ -5,6 +5,7 @@ import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';  // Import Swiper CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { format } from 'date-fns';  // Import date formatting library
+import { FaHeart, FaRegHeart } from 'react-icons/fa'; // Heart icons
 
 const EventDetails = () => {
   const { id } = useParams();  // Get the event ID from the URL
@@ -14,15 +15,18 @@ const EventDetails = () => {
   const [rating, setRating] = useState(5);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isFavorited, setIsFavorited] = useState(false); // Track favorite status
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get(`/events/${id}`)  // Fetch event details using the ID
+    api.get(`/events/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })  // Fetch event details using the ID
       .then((response) => {
         setEvent(response.data);
         setComments(response.data.comments);  // Set comments from response
-      
+        setIsFavorited(response.data.is_favorite); // Assuming API returns if event is favorited by the user
         setLoading(false);
 
         // Initialize Swiper for the event images/videos
@@ -43,7 +47,24 @@ const EventDetails = () => {
       });
   }, [id]);
 
-  
+   // Toggle favorite status
+   const toggleFavorite = async () => {
+    if (!token) {
+      navigate('/login');  // Redirect to login if not logged in
+      return;
+    }
+
+    try {
+      const response = await api.post(`/favorites`, {
+        event_id: id,
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setIsFavorited(!isFavorited);  // Toggle favorite state in the frontend
+    } catch (err) {
+      setError('Error toggling favorite.');
+    }
+  };
     // Add comment and rating
     const handleCommentSubmit = async (e) => {
       e.preventDefault();
@@ -168,6 +189,19 @@ const renderStars = (rating) => {
                   <li><strong>Price</strong>: {event.price}</li>
                   <li><strong>Date</strong>: {new Date(event.created_at).toLocaleDateString()}</li>
                 </ul>
+                 {/* Favorite Button */}
+                 <div className="favorite-button mt-4">
+                  <button onClick={toggleFavorite} className="btn btn-link">
+                    {isFavorited ? (
+                      <FaHeart color="red" size={24} />
+                    ) : (
+                      <FaRegHeart color="gray" size={24} />
+                    )}
+                    <span className="ms-2">
+                      {isFavorited ? 'Remove from Favorites' : 'Add to Favorites'}
+                    </span>
+                  </button>
+                </div>
               </div>
               <div className="portfolio-description" data-aos="fade-up" data-aos-delay="300">
                 <h2>{event.name}</h2>
