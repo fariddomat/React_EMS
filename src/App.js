@@ -13,6 +13,7 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import PrivateRoute from './PrivateRoute';
 
+import PackageList from './PackageList';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 
@@ -40,6 +41,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/packageList" element={<PackageList />} />
         <Route path="/companies" element={<Companies />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventDetails />} />

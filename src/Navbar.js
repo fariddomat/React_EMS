@@ -32,6 +32,9 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 <NavLink to="/events" activeClassName="active">Events</NavLink>
               </li>
               <li>
+                <NavLink to="/packageList" activeClassName="active">Packages</NavLink>
+              </li>
+              <li>
                 <NavLink to="/about" activeClassName="active">About</NavLink>
               </li>
               <li>
