@@ -16,6 +16,8 @@ const EventDetails = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [isFavorited, setIsFavorited] = useState(false); // Track favorite status
+  const [selectedDate, setSelectedDate] = useState(''); // State for selected booking date
+  const [showBookingForm, setShowBookingForm] = useState(false); // Toggle booking form
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
 
@@ -104,6 +106,33 @@ const handleDeleteComment = async (commentId) => {
   }
 };
 
+ // Handle booking with date
+ const handleBooking = async (e) => {
+  e.preventDefault();
+  
+  if (!token) {
+    navigate('/login');
+    return;
+  }
+
+  try {
+    const response = await api.post('/bookings', {
+      event_id: id,
+      booking_date: selectedDate,  // Pass selected booking date
+    }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    alert('Booking successful');
+  } catch (err) {
+    setError('Error booking event.');
+  }
+};
+
+// Show booking form when the user clicks the book button
+const handleShowBookingForm = () => {
+  setShowBookingForm(true);
+};
 
 const renderStars = (rating) => {
   const stars = [];
@@ -215,10 +244,32 @@ const renderStars = (rating) => {
 
       <section className="event-details section mt-5">
       {error && <div className="alert alert-danger">{error}</div>}
+           
+           {token && (
+        <section className="booking-form section mt-5">
+          <div className="container">
+            <h3>Select Booking Date</h3>
+            <form onSubmit={handleBooking}>
+              <div className="form-group mb-3">
+                <label htmlFor="bookingDate">Booking Date:</label>
+                <input
+                  type="datetime-local"
+                  id="bookingDate"
+                  className="form-control"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-success">Confirm Booking</button>
+            </form>
+          </div>
+        </section>
+      )}
 
       {/* Event Information */}
       <div className="container">
-
+                    
         {/* Comment Form */}
         {token && (
           <div className="card my-4">

@@ -14,6 +14,9 @@ import Dashboard from './Dashboard';
 import PrivateRoute from './PrivateRoute';
 
 import PackageList from './PackageList';
+import Booking from './Booking';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 
@@ -47,6 +50,7 @@ function App() {
         <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/bookings" element={<Booking />} />
       </Routes>
       <Footer />
     </Router>
