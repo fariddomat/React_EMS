@@ -20,6 +20,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import BookingPage from './BookingPage';
 import ProfileUpdate from './ProfileUpdate ';
 import CompanyDetail from './CompanyDetail';
+import Notifications from './Notifications ';
+import BlogList from './BlogList';
+import BlogDetails from './BlogDetails';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
@@ -59,7 +62,11 @@ function App() {
         <Route path="/bookings" element={<Booking />} />
         <Route path="/payments" element={<UserPayments />} />
         <Route path="/profile" element={<ProfileUpdate />} />
+        <Route path="/notifications" element={<Notifications />} />
         
+        <Route path="/blogs" element={<BlogList />} />
+        <Route path="/blogs/:id" element={<BlogDetails />} />  {/* Dynamic route for company details */}
+       
       </Routes>
       <Footer />
     </Router>

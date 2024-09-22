@@ -9,12 +9,12 @@ const Footer = () => {
           {/* Footer About */}
           <div className="col-lg-4 col-md-6">
             <div className="footer-about">
-              <Link to="/" className="logo sitename">EMS2</Link>
+              <Link to="/" className="logo sitename">EMS</Link>
               <div className="footer-contact pt-3">
                 <p>123 Event Street</p>
                 <p>Berlin, Germany 10115</p>
                 <p className="mt-3"><strong>Phone:</strong> <span>+49 30 123456</span></p>
-                <p><strong>Email:</strong> <span>contact@ems2.com</span></p>
+                <p><strong>Email:</strong> <span>contact@ems.com</span></p>
               </div>
               {/* Social Links */}
               <div className="social-links d-flex mt-4">
@@ -53,7 +53,7 @@ const Footer = () => {
       <div className="container text-center mt-4">
         <p>© <strong>EMS</strong> 2024. All Rights Reserved.</p>
         <div className="credits">
-          Designed by <a href="https://yourwebsite.com" target="_blank" rel="noopener noreferrer">YourCompany</a>
+          Designed by <a href="https://yourwebsite.com" target="_blank" rel="noopener noreferrer">EMS</a>
         </div>
       </div>
     </footer>
