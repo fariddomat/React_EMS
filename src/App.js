@@ -13,9 +13,12 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import PrivateRoute from './PrivateRoute';
 
+import UserPayments from './UserPayments';  // Import your new component
 import PackageList from './PackageList';
 import Booking from './Booking';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import BookingPage from './BookingPage';
+import ProfileUpdate from './ProfileUpdate ';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
@@ -45,12 +48,16 @@ function App() {
           }
         />
         <Route path="/packageList" element={<PackageList />} />
+        <Route path="/book-package/:packageId" element={<BookingPage />} />
         <Route path="/companies" element={<Companies />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/bookings" element={<Booking />} />
+        <Route path="/payments" element={<UserPayments />} />
+        <Route path="/profile" element={<ProfileUpdate />} />
+        
       </Routes>
       <Footer />
     </Router>

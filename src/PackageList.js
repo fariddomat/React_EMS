@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from './api';  // Axios instance for API calls
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';  // Use Link for navigation to the booking page
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -13,16 +13,16 @@ const PackageList = () => {
   useEffect(() => {
     AOS.init(); // Initialize AOS
 
-      
-        api.get('/packages').then((response) => { 
+    // Fetch packages
+    api.get('/packages')
+      .then((response) => {
         setPackagesList(response.data);
         setLoading(false);
-    }).catch ((error) => {
-        setError('Error fetching events');
+      })
+      .catch((error) => {
+        setError('Error fetching packages');
         setLoading(false);
       });
-    
-
   }, []);
 
   if (loading) return <div>Loading...</div>;
@@ -42,8 +42,7 @@ const PackageList = () => {
               <div className="pricing-item">
                 <h3>{pkg.name}</h3>
                 <h4>
-                  <sup>$</sup>
-                  {pkg.price}
+                  <sup>$</sup>{pkg.price}
                 </h4>
                 <ul>
                   <li>
@@ -53,7 +52,8 @@ const PackageList = () => {
                   {/* Add other details as needed */}
                 </ul>
                 <div className="text-center">
-                  <a href="#" className="buy-btn">Buy Now</a>
+                  {/* Use Link to navigate to the booking page, passing package info */}
+                  <Link to={`/book-package/${pkg.id}`} className="buy-btn">Book Now</Link>
                 </div>
               </div>
             </div>

@@ -7,7 +7,6 @@ import Swiper from 'swiper';
 import './swiper/swiper-bundle.min.css';
 import 'glightbox/dist/css/glightbox.min.css';
 import './css/main.css';
-import Navbar from './Navbar';
 
 const Home = () => {
     const [events, setEvents] = useState([]);

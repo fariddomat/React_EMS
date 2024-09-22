@@ -41,9 +41,31 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 <NavLink to="/contact-us" activeClassName="active">Contact Us</NavLink>
               </li>
               {isLoggedIn ? (
-                <li>
-                  <NavLink to="/login" onClick={onLogout}>Logout</NavLink>
-                </li>
+                <li className="dropdown">
+                <a href="#"><span>My Account</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  {/* First-level dropdown */}
+                  <li>
+                    <NavLink to="/profile">Profile</NavLink>
+                  </li>
+                  <li className="dropdown">
+                    <a href="#"><span>My Bookings</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                      {/* Deep Dropdown */}
+                      <li>
+                        <NavLink to="/bookings">View Bookings</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/payments">View Payments</NavLink>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <NavLink to="/logout" onClick={onLogout}>Logout</NavLink>
+                  </li>
+                </ul>
+              </li>
+              
               ) : (
                 <li>
                   <NavLink to="/login" activeClassName="active">Login</NavLink>
