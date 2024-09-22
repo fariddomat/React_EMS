@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import api from './api';  // Axios instance for API calls
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AOS from 'aos';
@@ -13,7 +14,7 @@ const Companies = () => {
   useEffect(() => {
     AOS.init();
     
-    api.get('/companies')  // Replace with the correct API endpoint
+    api.get('/companies')
       .then((response) => {
         setCompanies(response.data);
         setLoading(false);
@@ -33,7 +34,7 @@ const Companies = () => {
   }
 
   return (
-    <section id="team" className="team section mt-5" >
+    <section id="team" className="team section mt-5">
       <div className="container section-title" data-aos="fade-up">
         <span>Our Companies</span>
         <h2>Companies</h2>
@@ -45,7 +46,6 @@ const Companies = () => {
           {companies.map((company, index) => (
             <div key={company.id} className="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay={`${(index + 1) * 100}`}>
               <div className="member">
-                {/* Display the first image from the images array, or a placeholder if none */}
                 <img
                   src={company.images && company.images.length > 0
                     ? `http://127.0.0.1:8000${company.images[0]}`  // Adjust based on your API's image URL
@@ -58,12 +58,13 @@ const Companies = () => {
                   <span>{company.roles}</span>
                   <p>{company.description}</p>
                   <div className="social">
-                    {/* Example static social media links */}
                     <a href="#"><i className="bi bi-twitter"></i></a>
                     <a href="#"><i className="bi bi-facebook"></i></a>
                     <a href="#"><i className="bi bi-instagram"></i></a>
                     <a href="#"><i className="bi bi-linkedin"></i></a>
                   </div>
+                  {/* Link to the company detail page */}
+                  <Link to={`/companies/${company.id}`} className="btn btn-primary mt-3">View Details</Link>
                 </div>
               </div>
             </div>
