@@ -881,9 +881,9 @@ section,
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
-  min-height: 100vh;
+  min-height: 0 !important;
   position: relative;
-  padding: 160px 0 100px 0;
+  padding: 0 !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1706,4 +1706,86 @@ section,
 --------------------------------------------------------------*/
 .starter-section {
   /* Add your styles here */
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+.hero {
+  --background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero h2 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.hero p {
+  margin: 10px 0 0 0;
+  font-size: 24px;
+  color: var(--heading-color);
+}
+
+@media (max-width: 768px) {
+  .hero h2 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+}
+
+.hero .countdown {
+  margin-top: 25px;
+}
+
+.hero .countdown div {
+  text-align: center;
+  border: 2px solid color-mix(in srgb, var(--default-color), white 90%);
+  border-radius: 8px;
+  margin: 10px 10px;
+  width: 100px;
+  padding: 15px 0;
+}
+
+.hero .countdown div h3 {
+  font-weight: 700;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.hero .countdown div h4 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 575px) {
+  .hero .countdown div {
+    width: 70px;
+    padding: 10px 0;
+    margin: 10px 8px;
+  }
+
+  .hero .countdown div h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .hero .countdown div h4 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.hero .countdown div h3 {
+  font-weight: 700;
+  font-size: 32px;
+  margin-bottom: 15px;
 }
