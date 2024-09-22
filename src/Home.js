@@ -47,7 +47,7 @@ const Home = () => {
        {/* {<Navbar />} */}
         <main>
           {/* Hero Section */}
-          <section id="hero" className="hero section dark-background">
+          <section id="hero" className="hero section dark-background" style={{ minHeight:'100vh ' }}>
   <img src="./img/hero-bg.jpg" alt="Hero Background" data-aos="fade-in" />
   <div className="container" data-aos="fade-up" data-aos-delay="100">
     <div className="row justify-content-start">

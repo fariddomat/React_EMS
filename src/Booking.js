@@ -118,7 +118,7 @@ const Booking = () => {
 
                 {/* Show countdown if booking is confirmed */}
                 {booking.status === 'confirmed' && countdowns[booking.id] && (
-                  <div className='hero'>
+                  <div className='hero2'>
                   <div className="countdown mt-3">
                     <h5>Event Countdown:</h5>
                     <div className="d-flex justify-content-around" style={{ width:'100%' }}>
