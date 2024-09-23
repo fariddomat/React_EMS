@@ -84,7 +84,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
               </ul>
             </li>
             <li>
-              <NavLink to="/logout" onClick={onLogout}>Logout</NavLink>
+              <NavLink to="/" onClick={onLogout}>Logout</NavLink>
             </li>
           </ul>
         </li>

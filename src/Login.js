@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from './api';  // Import Axios instance
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -60,6 +61,8 @@ const Login = ({ onLogin }) => {
             Login
           </button>
         </form>
+        <Link to={`/register`} className="btn btn-primary mt-3">Register</Link>
+                
       </div>
     </section>
   );
