@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from './api';  // Axios instance for API calls
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
 const CompanyDetail = () => {
   const { id } = useParams();  // Get the company ID from the URL
@@ -61,7 +62,7 @@ const CompanyDetail = () => {
         </div>
         {/* Display company images */}
         <div className="row">
-          {company.images && company.images.length > 0 ? (
+          {Array.isArray(company.images) && company.images && company.images.length > 0 ? (
             company.images.map((image, index) => (
               <div key={index} className="col-lg-4 col-md-6">
                 <img
@@ -82,7 +83,9 @@ const CompanyDetail = () => {
           {events.length > 0 ? (
             events.map((event) => (
               <li key={event.id} className="list-group-item">
-                <a href={`/events/${event.id}`}>{event.name}</a>  {/* Link to event detail page */}
+                 <Link to={`/events/${event.id}`} className="btn btn-primary">
+                 {event.name}
+                  </Link>  {/* Link to event detail page */}
                 <p>{event.description}</p>
               </li>
             ))

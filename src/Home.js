@@ -24,7 +24,7 @@ const Home = () => {
       });
   
       // Fetch events from API
-      api.get('/events')
+      api.get('/home-events')
         .then((response) => {
           setEvents(response.data);
         })
@@ -211,11 +211,17 @@ const Home = () => {
               {events.map(event => (
                 <div key={event.id} className="col-lg-4 col-md-6 portfolio-item isotope-item">
                   {/* Display the first image from the images array */}
+                  {Array.isArray(event.images) && event.images.length > 0 ? (
                   <img
-                    src={event.images && event.images.length > 0 ? `http://127.0.0.1:8000${event.images[0]}` : '/assets/img/placeholder.png'}
+                    src={event.images && event.images.length > 0
+                      ? `http://127.0.0.1:8000${event.images[0]}`  // Adjust based on your API's image URL
+                      : './img/hero-bg.jpg'}  // Placeholder image
                     className="img-fluid"
                     alt={event.name}
                   />
+                ) : (
+                  <img src='./img/hero-bg.jpg' className="img-fluid" alt="Event placeholder" />
+                )}
                   <div className="portfolio-info">
                     <h4>{event.name}</h4>
                     <p>{event.description}</p>
@@ -259,13 +265,20 @@ const Home = () => {
               <div key={company.id} className="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay={`${(index + 1) * 100}`}>
                 <div className="member">
                   {/* Display the first image from the images array, or a placeholder if none */}
+                   {Array.isArray(company.images) && company.images.length > 0 ? (
                   <img
                     src={company.images && company.images.length > 0
                       ? `http://127.0.0.1:8000${company.images[0]}`
-                      : '/assets/img/team/placeholder.jpg'}
+                      : './img/services.jpg'}
                     className="img-fluid"
                     alt={company.name}
-                  />
+                  />):(
+                    <img
+                    src='./img/services.jpg'
+                    className="img-fluid"
+                    alt={company.name}
+                    />
+                  )}
                   <div className="member-content">
                     <h4>{company.name}</h4>
                     <span>{company.roles}</span>

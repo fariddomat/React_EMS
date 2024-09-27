@@ -46,13 +46,20 @@ const Companies = () => {
           {companies.map((company, index) => (
             <div key={company.id} className="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay={`${(index + 1) * 100}`}>
               <div className="member">
-                <img
-                  src={company.images && company.images.length > 0
-                    ? `http://127.0.0.1:8000${company.images[0]}`  // Adjust based on your API's image URL
-                    : '/assets/img/team/placeholder.jpg'}  // Placeholder image
-                  className="img-fluid"
-                  alt={company.name}
-                />
+              {Array.isArray(company.images) && company.images.length > 0 ? (
+                  <img
+                    src={company.images && company.images.length > 0
+                      ? `http://127.0.0.1:8000${company.images[0]}`
+                      : './img/services.jpg'}
+                    className="img-fluid"
+                    alt={company.name}
+                  />):(
+                    <img
+                    src='./img/services.jpg'
+                    className="img-fluid"
+                    alt={company.name}
+                    />
+                  )}
                 <div className="member-content">
                   <h4>{company.name}</h4>
                   <span>{company.roles}</span>

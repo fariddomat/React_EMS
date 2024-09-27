@@ -181,14 +181,14 @@ const renderStars = (rating) => {
               <div className="portfolio-details-slider swiper-container">
                 <div className="swiper-wrapper align-items-center">
                   {/* Display Images */}
-                  {event.images && event.images.length > 0 && event.images.map((image, index) => (
+                  {Array.isArray(event.images) && event.images.length  && event.images.map((image, index) => (
                     <div key={index} className="swiper-slide">
                       <img src={`http://127.0.0.1:8000${image}`} alt={`Event Image ${index + 1}`} />
                     </div>
                   ))}
                   
                   {/* Display Videos */}
-                  {event.videos && event.videos.length > 0 && event.videos.map((video, index) => (
+                  {Array.isArray(event.videos) && event.videos && event.videos.length > 0 && event.videos.map((video, index) => (
                     <div key={index} className="swiper-slide">
                       <video controls>
                         <source src={`http://127.0.0.1:8000${video}`} type="video/mp4" />
