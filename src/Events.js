@@ -11,26 +11,50 @@ const Events = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');  // New state for search query
+  const [categories, setCategories] = useState([]);    // State for categories
+  const [selectedCategory, setSelectedCategory] = useState(''); // State for selected category
 
-  // Fetch events from the API when the component mounts and when the currentPage changes
+  // Fetch events and categories from the API
   useEffect(() => {
-    AOS.init();
+    fetchEvents(currentPage, searchQuery, selectedCategory);
+    fetchCategories();  // Fetch categories from the backend
+  }, [currentPage, searchQuery, selectedCategory]);
 
-    setLoading(true); // Set loading to true on page change
-    api.get(`/events-page?page=${currentPage}`)  // Use 'page' as the query parameter
+  const fetchEvents = (page, search, category) => {
+    setLoading(true);
+    api.get(`/events-page?page=${page}&search=${search}&category=${category}`)  // Adjust API endpoint
       .then((response) => {
         setEvents(response.data.data);
-        setTotalPages(response.data.last_page); // total pages from pagination response
+        setTotalPages(response.data.last_page);
         setLoading(false);
       })
       .catch((error) => {
         setError('Error fetching events');
         setLoading(false);
       });
-  }, [currentPage]);  // Depend on currentPage
+  };
+
+  const fetchCategories = () => {
+    api.get('/categories')  // Adjust based on your API endpoint
+      .then((response) => {
+        setCategories(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching categories:', error);
+      });
+  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
   };
 
   if (loading) {
@@ -49,12 +73,31 @@ const Events = () => {
         <p>Explore the latest events we offer.</p>
       </div>
 
+      <div className="container mb-4">
+        {/* Search bar */}
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search events..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+
+        {/* Category filter */}
+        <select className="form-select mt-3" value={selectedCategory} onChange={handleCategoryChange}>
+          <option value="">All Categories</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.name}>{category.name}</option>
+          ))}
+        </select>
+      </div>
+
       <div className="container">
         <div className="row">
           {events.map((event, index) => (
             <div key={event.id} className="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay={`${(index + 1) * 100}`}>
               <div className="event-box">
-                {Array.isArray(event.images) && event.images.length > 0 ? (
+              {Array.isArray(event.images) && event.images.length > 0 ? (
                   <img
                     src={event.images && event.images.length > 0
                       ? `http://127.0.0.1:8000${event.images[0]}`  // Adjust based on your API's image URL
@@ -68,7 +111,6 @@ const Events = () => {
                 <div className="event-content">
                   <h4>{event.name}</h4>
                   <p>{event.description}</p>
-                  {/* Link to the event's details page */}
                   <Link to={`/events/${event.id}`} className="btn btn-primary">
                     View Event Details
                   </Link>
@@ -77,9 +119,10 @@ const Events = () => {
             </div>
           ))}
         </div>
-        <div className='row mt-4'>
-          {/* Pagination controls */}
-          <nav aria-label="Page navigation">
+
+        {/* Pagination */}
+        <div className='row'>
+        <nav aria-label="Page navigation">
             <ul className="pagination justify-content-center">
               {Array.from({ length: totalPages }, (_, index) => (
                 <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>

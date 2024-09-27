@@ -177,36 +177,42 @@ const renderStars = (rating) => {
           <div className="row gy-4">
 
             {/* Image/Video Slider */}
-            <div className="col-lg-8" style={{overflow:'hidden'}}>
-              <div className="portfolio-details-slider swiper-container">
-                <div className="swiper-wrapper align-items-center">
-                  {/* Display Images */}
-                  {Array.isArray(event.images) && event.images.length  && event.images.map((image, index) => (
-                    <div key={index} className="swiper-slide">
-                      <img src={`http://127.0.0.1:8000${image}`} alt={`Event Image ${index + 1}`} />
-                    </div>
-                  ))}
-                  
-                  {/* Display Videos */}
-                  {Array.isArray(event.videos) && event.videos && event.videos.length > 0 && event.videos.map((video, index) => (
-                    <div key={index} className="swiper-slide">
-                      <video controls>
-                        <source src={`http://127.0.0.1:8000${video}`} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </div>
-                  ))}
+            {/* Image/Video Slider */}
+<div className="col-lg-8" style={{ overflow: 'hidden' }}>
+  {Array.isArray(event.images) && event.images.length > 0 || 
+   Array.isArray(event.videos) && event.videos.length > 0 ? (
+    // Swiper component when images or videos exist
+    <div className="portfolio-details-slider swiper-container">
+      <div className="swiper-wrapper align-items-center">
+        {/* Display Images */}
+        {Array.isArray(event.images) && event.images.length > 0 && event.images.map((image, index) => (
+          <div key={index} className="swiper-slide">
+            <img src={`http://127.0.0.1:8000${image}`} alt={`Event Image ${index + 1}`} />
+          </div>
+        ))}
 
-                  {/* Show a placeholder if no images/videos are available */}
-                  {(!event.images || event.images.length === 0) && (!event.videos || event.videos.length === 0) && (
-                    <div className="swiper-slide">
-                      <img src="/assets/img/event-placeholder.jpg" alt="No images or videos available" />
-                    </div>
-                  )}
-                </div>
-                <div className="swiper-pagination"></div>
-              </div>
-            </div>
+        {/* Display Videos */}
+        {Array.isArray(event.videos) && event.videos.length > 0 && event.videos.map((video, index) => (
+          <div key={index} className="swiper-slide">
+            <video controls>
+              <source src={`http://127.0.0.1:8000${video}`} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        ))}
+      </div>
+      <div className="swiper-pagination"></div>
+    </div>
+  ) : (
+    // Placeholder image when no images or videos are available
+    <div>
+      
+      <img src='./../img/hero-bg.jpg' className="img-fluid" alt="Event placeholder" />
+    </div>
+  )}
+</div>
+
+
 
             {/* Event Information */}
             <div className="col-lg-4">
