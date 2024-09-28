@@ -11,19 +11,21 @@ const Events = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');  // New state for search query
-  const [categories, setCategories] = useState([]);    // State for categories
-  const [selectedCategory, setSelectedCategory] = useState(''); // State for selected category
-
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [suggestedEvents, setSuggestedEvents] = useState([]);  // New state for suggested events
+  const token = localStorage.getItem('token');
   // Fetch events and categories from the API
   useEffect(() => {
     fetchEvents(currentPage, searchQuery, selectedCategory);
-    fetchCategories();  // Fetch categories from the backend
+    fetchCategories();
+    fetchSuggestedEvents();
   }, [currentPage, searchQuery, selectedCategory]);
 
   const fetchEvents = (page, search, category) => {
     setLoading(true);
-    api.get(`/events-page?page=${page}&search=${search}&category=${category}`)  // Adjust API endpoint
+    api.get(`/events-page?page=${page}&search=${search}&category=${category}`)
       .then((response) => {
         setEvents(response.data.data);
         setTotalPages(response.data.last_page);
@@ -36,12 +38,22 @@ const Events = () => {
   };
 
   const fetchCategories = () => {
-    api.get('/categories')  // Adjust based on your API endpoint
+    api.get('/categories')
       .then((response) => {
         setCategories(response.data);
       })
       .catch((error) => {
         console.error('Error fetching categories:', error);
+      });
+  };
+
+  const fetchSuggestedEvents = () => {
+    api.get('/event-suggestions')  // Adjust the endpoint to match your backend
+      .then((response) => {
+        setSuggestedEvents(response.data.suggestions);
+      })
+      .catch((error) => {
+        console.error('Error fetching suggested events:', error);
       });
   };
 
@@ -97,11 +109,9 @@ const Events = () => {
           {events.map((event, index) => (
             <div key={event.id} className="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay={`${(index + 1) * 100}`}>
               <div className="event-box">
-              {Array.isArray(event.images) && event.images.length > 0 ? (
+                {Array.isArray(event.images) && event.images.length > 0 ? (
                   <img
-                    src={event.images && event.images.length > 0
-                      ? `http://127.0.0.1:8000${event.images[0]}`  // Adjust based on your API's image URL
-                      : './img/hero-bg.jpg'}  // Placeholder image
+                    src={event.images.length > 0 ? `http://127.0.0.1:8000${event.images[0]}` : './img/hero-bg.jpg'}
                     className="img-fluid"
                     alt={event.name}
                   />
@@ -121,8 +131,8 @@ const Events = () => {
         </div>
 
         {/* Pagination */}
-        <div className='row'>
-        <nav aria-label="Page navigation">
+        <div className="row">
+          <nav aria-label="Page navigation">
             <ul className="pagination justify-content-center">
               {Array.from({ length: totalPages }, (_, index) => (
                 <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
@@ -138,6 +148,41 @@ const Events = () => {
             </ul>
           </nav>
         </div>
+
+        {/* Suggested Events Section */}
+        {token && (
+          <div className="container mt-5">
+            <div className="section-title" data-aos="fade-up">
+              <span>Suggested Events</span>
+              <h2>Events You May Like</h2>
+              <p>Based on your activity, we recommend the following events.</p>
+            </div>
+            <div className="row">
+              {suggestedEvents.map((event, index) => (
+                <div key={event.id} className="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay={`${(index + 1) * 100}`}>
+                  <div className="event-box">
+                    {Array.isArray(event.images) && event.images.length > 0 ? (
+                      <img
+                        src={event.images.length > 0 ? `http://127.0.0.1:8000${event.images[0]}` : './img/hero-bg.jpg'}
+                        className="img-fluid"
+                        alt={event.name}
+                      />
+                    ) : (
+                      <img src='./img/hero-bg.jpg' className="img-fluid" alt="Event placeholder" />
+                    )}
+                    <div className="event-content">
+                      <h4>{event.name}</h4>
+                      <p>{event.description}</p>
+                      <Link to={`/events/${event.id}`} className="btn btn-primary">
+                        View Event Details
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
