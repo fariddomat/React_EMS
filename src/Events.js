@@ -80,9 +80,9 @@ const Events = () => {
   return (
     <section id="events" className="events section mt-5">
       <div className="container section-title" data-aos="fade-up">
-        <span>Events</span>
-        <h2>Our Events</h2>
-        <p>Explore the latest events we offer.</p>
+        <span>Services</span>
+        <h2>Our Services</h2>
+        <p>Explore the latest services we offer.</p>
       </div>
 
       <div className="container mb-4">
@@ -90,7 +90,7 @@ const Events = () => {
         <input
           type="text"
           className="form-control"
-          placeholder="Search events..."
+          placeholder="Search services..."
           value={searchQuery}
           onChange={handleSearchChange}
         />
@@ -122,7 +122,7 @@ const Events = () => {
                   <h4>{event.name}</h4>
                   <p>{event.description}</p>
                   <Link to={`/events/${event.id}`} className="btn btn-primary">
-                    View Event Details
+                    View Service Details
                   </Link>
                 </div>
               </div>
@@ -153,9 +153,9 @@ const Events = () => {
         {token && (
           <div className="container mt-5">
             <div className="section-title" data-aos="fade-up">
-              <span>Suggested Events</span>
-              <h2>Events You May Like</h2>
-              <p>Based on your activity, we recommend the following events.</p>
+              <span>Suggested Services</span>
+              <h2>Services You May Like</h2>
+              <p>Based on your activity, we recommend the following services.</p>
             </div>
             <div className="row">
               {suggestedEvents.map((event, index) => (

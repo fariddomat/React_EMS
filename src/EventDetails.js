@@ -176,7 +176,7 @@ const EventDetails = () => {
           <nav className="breadcrumbs">
             <ol>
               <li><Link to="/">Home</Link></li>
-              <li className="current">Event Details</li>
+              <li className="current">Service Details</li>
             </ol>
           </nav>
           <h1>{event.name} Details</h1>
@@ -228,9 +228,9 @@ const EventDetails = () => {
             {/* Event Information */}
             <div className="col-lg-4">
               <div className="portfolio-info" data-aos="fade-up" data-aos-delay="200">
-                <h3>Event Information</h3>
+                <h3>Service Information</h3>
                 <ul>
-                  <li><strong>Event Name</strong>: {event.name}</li>
+                  <li><strong>Service Name</strong>: {event.name}</li>
                   <li><strong>Company Name</strong>: {event.company && event.company.name}</li> {/* Assuming event.company is included in the API response */}
                   <li><strong>Price</strong>: {event.price}</li>
                   <li><strong>Date</strong>: {new Date(event.created_at).toLocaleDateString()}</li>
@@ -353,9 +353,9 @@ const EventDetails = () => {
         {token && (
           <div className="container mt-5">
             <div className="section-title" data-aos="fade-up">
-              <span>Suggested Events</span>
-              <h2>Events You May Like</h2>
-              <p>Based on your activity, we recommend the following events.</p>
+              <span>Suggested Services</span>
+              <h2>Services You May Like</h2>
+              <p>Based on your activity, we recommend the following services.</p>
             </div>
             <div className="row">
               {suggestedEvents.map((event, index) => (

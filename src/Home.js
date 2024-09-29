@@ -114,7 +114,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              {/* <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                 <div className="service-item position-relative">
                   <div className="icon">
                     <i className="bi bi-people"></i>
@@ -148,7 +148,7 @@ const Home = () => {
                   </a>
                   <p>Get detailed reports and insights on audience behavior and engagement, helping you optimize future events for even greater success.</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
                 <div className="service-item position-relative">
@@ -199,8 +199,8 @@ const Home = () => {
 
         <section id="portfolio" className="portfolio section">
           <div className="container section-title" data-aos="fade-up">
-            <span>Events</span>
-            <h2>Events</h2>
+            <span>Services</span>
+            <h2>Services</h2>
             <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
           </div>
 
@@ -226,7 +226,7 @@ const Home = () => {
                       <h4>{event.name}</h4>
                       <p>{event.description}</p>
                       <Link to={`/events/${event.id}`} className="btn btn-primary">
-                        View Event Details
+                        View Service Details
                       </Link>
                       <a
                         href={event.images && event.images.length > 0 ? event.images[0] : '#'}

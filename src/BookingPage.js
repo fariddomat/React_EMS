@@ -54,7 +54,7 @@ const BookingPage = () => {
       <div className="container section-title" data-aos="fade-up">
         <span>Bookings</span>
         <h2>Book a Package</h2>
-        <p>Book your desired package and explore its events.</p>
+        <p>Book your desired package and explore its services.</p>
       </div>
 
       <div className="container">
@@ -73,7 +73,7 @@ const BookingPage = () => {
           <div>Loading package details...</div>
         )}
 
-        <h4>Events Associated with this Package</h4>
+        <h4>Services Associated with this Package</h4>
         <div className="row">
           {events.length > 0 ? (
             events.map((event) => (

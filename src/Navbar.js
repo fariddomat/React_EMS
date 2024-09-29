@@ -42,7 +42,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 <NavLink to="/companies" activeClassName="active">Companies</NavLink>
               </li>
               <li>
-                <NavLink to="/events" activeClassName="active">Events</NavLink>
+                <NavLink to="/events" activeClassName="active">Services</NavLink>
               </li>
               <li>
                 <NavLink to="/packageList" activeClassName="active">Packages</NavLink>
