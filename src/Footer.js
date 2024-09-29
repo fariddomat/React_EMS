@@ -12,8 +12,8 @@ const Footer = () => {
               <Link to="/" className="logo sitename">EMS</Link>
               <div className="footer-contact pt-3">
                 <p>123 Event Street</p>
-                <p>Berlin, Germany 10115</p>
-                <p className="mt-3"><strong>Phone:</strong> <span>+49 30 123456</span></p>
+                <p>Alhwash University</p>
+                <p className="mt-3"><strong>Phone:</strong> <span>+963 999 999 999</span></p>
                 <p><strong>Email:</strong> <span>contact@ems.com</span></p>
               </div>
               {/* Social Links */}

@@ -191,8 +191,7 @@ const EventDetails = () => {
             {/* Image/Video Slider */}
             {/* Image/Video Slider */}
             <div className="col-lg-8" style={{ overflow: 'hidden' }}>
-              {Array.isArray(event.images) && event.images.length > 0 ||
-                Array.isArray(event.videos) && event.videos.length > 0 ? (
+              {Array.isArray(event.images) && event.images.length > 0  ? (
                 // Swiper component when images or videos exist
                 <div className="portfolio-details-slider swiper-container">
                   <div className="swiper-wrapper align-items-center">
@@ -260,11 +259,11 @@ const EventDetails = () => {
         </div>
       </section>
 
-      <section className="event-details section mt-5">
+      <section className="event-details section">
         {error && <div className="alert alert-danger">{error}</div>}
 
         {token && (
-          <section className="booking-form section mt-5">
+          <section className="booking-form section">
             <div className="container">
               <h3>Select Booking Date</h3>
               <form onSubmit={handleBooking}>

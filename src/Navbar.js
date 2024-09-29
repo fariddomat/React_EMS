@@ -57,42 +57,42 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                 <NavLink to="/contact-us" activeClassName="active">Contact Us</NavLink>
               </li>
               {isLoggedIn ? (
-        <li className="dropdown">
-          <a href="#">
-            <span>My Account</span>
-            <i className="bi bi-chevron-down toggle-dropdown"></i>
-            {notificationCount > 0 && (
-              <span className="badge bg-danger">{notificationCount}</span>
-            )}
-          </a>
-          <ul>
-            <li>
-              <NavLink to="/profile">Profile</NavLink>
-            </li>
-            <li>
-              <NavLink to="/notifications">Notifications</NavLink>
-            </li>
-            <li className="dropdown">
-              <a href="#"><span>My Bookings</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li>
-                  <NavLink to="/bookings">View Bookings</NavLink>
+                <li className="dropdown">
+                  <a href="#">
+                    <span>My Account</span>
+                    <i className="bi bi-chevron-down toggle-dropdown"></i>
+                    {notificationCount > 0 && (
+                      <span className="badge bg-danger">{notificationCount}</span>
+                    )}
+                  </a>
+                  <ul>
+                    <li>
+                      <NavLink to="/profile">Profile</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/notifications">Notifications</NavLink>
+                    </li>
+                    <li className="dropdown">
+                      <a href="#"><span>My Bookings</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
+                      <ul>
+                        <li>
+                          <NavLink to="/bookings">View Bookings</NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/payments">View Payments</NavLink>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <NavLink to="/" onClick={onLogout}>Logout</NavLink>
+                    </li>
+                  </ul>
                 </li>
+              ) : (
                 <li>
-                  <NavLink to="/payments">View Payments</NavLink>
+                  <NavLink to="/login" activeClassName="active">Login</NavLink>
                 </li>
-              </ul>
-            </li>
-            <li>
-              <NavLink to="/" onClick={onLogout}>Logout</NavLink>
-            </li>
-          </ul>
-        </li>
-      ) : (
-        <li>
-          <NavLink to="/login" activeClassName="active">Login</NavLink>
-        </li>
-      )}
+              )}
             </ul>
             <i id='mobile-nav-toggle' className="mobile-nav-toggle d-xl-none bi bi-list"></i>
           </nav>
