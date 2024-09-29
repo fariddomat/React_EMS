@@ -23,6 +23,7 @@ import CompanyDetail from './CompanyDetail';
 import Notifications from './Notifications ';
 import BlogList from './BlogList';
 import BlogDetails from './BlogDetails';
+import Favorite from './Favorite';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
@@ -63,7 +64,7 @@ function App() {
         <Route path="/payments" element={<UserPayments />} />
         <Route path="/profile" element={<ProfileUpdate />} />
         <Route path="/notifications" element={<Notifications />} />
-        
+        <Route path="/favorites" element={<Favorite />} />
         <Route path="/blogs" element={<BlogList />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />  {/* Dynamic route for company details */}
        

@@ -72,6 +72,9 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                     <li>
                       <NavLink to="/notifications">Notifications</NavLink>
                     </li>
+                    <li>
+                      <NavLink to="/favorites">Favorites</NavLink>
+                    </li>
                     <li className="dropdown">
                       <a href="#"><span>My Bookings</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
                       <ul>

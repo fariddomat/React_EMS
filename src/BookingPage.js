@@ -81,8 +81,7 @@ const BookingPage = () => {
                 <div className="card shadow-sm">
                   <div className="card-body">
                     <h5 className="card-title">{event.name}</h5>
-                    <p className="card-text"><strong>Date: </strong>{new Date(event.date).toLocaleDateString()}</p>
-                    <p className="card-text"><strong>Location: </strong>{event.location}</p>
+                    <p className="card-text"><strong>Date: </strong>{new Date(event.created_at).toLocaleDateString()}</p>
                     <Link to={`/events/${event.id}`} className="btn btn-outline-primary">
                       View Event Details
                     </Link>
