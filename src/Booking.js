@@ -120,7 +120,7 @@ const Booking = () => {
                 {booking.status === 'confirmed' && countdowns[booking.id] && (
                   <div className='hero2'>
                   <div className="countdown mt-3">
-                    <h5>Event Countdown:</h5>
+                    <h5>Service Countdown:</h5>
                     <div className="d-flex justify-content-around" style={{ width:'100%' }}>
                       <div><h3>{countdowns[booking.id].days}</h3> <h4>Days</h4></div>
                       <div><h3>{countdowns[booking.id].hours}</h3> <h4>Hours</h4></div>

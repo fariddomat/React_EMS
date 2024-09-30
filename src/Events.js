@@ -174,7 +174,7 @@ const Events = () => {
                       <h4>{event.name}</h4>
                       <p>{event.description}</p>
                       <Link to={`/events/${event.id}`} className="btn btn-primary">
-                        View Event Details
+                        View Service Details
                       </Link>
                     </div>
                   </div>

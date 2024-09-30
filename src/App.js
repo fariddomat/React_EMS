@@ -24,6 +24,8 @@ import Notifications from './Notifications ';
 import BlogList from './BlogList';
 import BlogDetails from './BlogDetails';
 import Favorite from './Favorite';
+import Cart from './Cart';
+import Checkout from './Checkout';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
@@ -67,6 +69,8 @@ function App() {
         <Route path="/favorites" element={<Favorite />} />
         <Route path="/blogs" element={<BlogList />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />  {/* Dynamic route for company details */}
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
        
       </Routes>
       <Footer />

@@ -70,6 +70,9 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
                       <NavLink to="/profile">Profile</NavLink>
                     </li>
                     <li>
+                      <NavLink to="/cart">Cart</NavLink>
+                    </li>
+                    <li>
                       <NavLink to="/notifications">Notifications</NavLink>
                     </li>
                     <li>

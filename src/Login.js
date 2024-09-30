@@ -62,6 +62,7 @@ const Login = ({ onLogin }) => {
           </button>
         </form>
         <Link to={`/register`} className="btn btn-primary mt-3">Register</Link>
+        <a href='http://127.0.0.1:8000' className="btn btn-primary mt-3">Login as company</a>
                 
       </div>
     </section>

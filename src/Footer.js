@@ -12,7 +12,7 @@ const Footer = () => {
               <Link to="/" className="logo sitename">EMS</Link>
               <div className="footer-contact pt-3">
                 <p>123 Event Street</p>
-                <p>Alhwash University</p>
+                <p>Kafrram - Marmarita</p>
                 <p className="mt-3"><strong>Phone:</strong> <span>+963 999 999 999</span></p>
                 <p><strong>Email:</strong> <span>contact@ems.com</span></p>
               </div>
@@ -32,7 +32,7 @@ const Footer = () => {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/events">Events</Link></li>
+              <li><Link to="/events">Services</Link></li>
               <li><Link to="/companies">Companies</Link></li>
               <li><Link to="/contact-us">Contact Us</Link></li>
             </ul>

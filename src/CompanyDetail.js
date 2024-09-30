@@ -78,7 +78,7 @@ const CompanyDetail = () => {
         </div>
 
         {/* List of related events */}
-        <h3 className="mt-4">Related Events</h3>
+        <h3 className="mt-4">Related Services</h3>
         <ul className="list-group">
           {events.length > 0 ? (
             events.map((event) => (
