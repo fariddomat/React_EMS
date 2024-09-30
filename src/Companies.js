@@ -46,11 +46,9 @@ const Companies = () => {
           {companies.map((company, index) => (
             <div key={company.id} className="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay={`${(index + 1) * 100}`}>
               <div className="member">
-              {Array.isArray(company.images) && company.images.length > 0 ? (
+              {company.cover ? (
                   <img
-                    src={company.images && company.images.length > 0
-                      ? `http://127.0.0.1:8000${company.images[0]}`
-                      : './img/services.jpg'}
+                    src={`http://127.0.0.1:8000${company.cover}`}
                     className="img-fluid"
                     alt={company.name}
                   />):(

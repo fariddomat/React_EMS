@@ -1,0 +1,14 @@
+.carousel-container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .company-details {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.8); /* Make background slightly transparent */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: -300px; /* Adjust to position the content over the slider */
+  }
+  

@@ -19,6 +19,7 @@ const EventDetails = () => {
   const [selectedDate, setSelectedDate] = useState(''); // State for selected date
   const [suggestedEvents, setSuggestedEvents] = useState([]);  // New state for suggested events
   const token = localStorage.getItem('token');
+  const [details, setDetails] = useState('');  // State to hold additional details
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -121,12 +122,11 @@ const EventDetails = () => {
 
   // Add to Cart Functionality
   const handleAddToCart = () => {
-    const newCart = [...cart, { event_id: event.id, name: event.name, price: event.price, selectedDate }];
+    const newCart = [...cart, { event_id: event.id, name: event.name, price: event.price, selectedDate, details }];
     setCart(newCart);
     localStorage.setItem('cart', JSON.stringify(newCart));  // Save the cart in localStorage
     alert('Added to cart!');
   };
-
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -179,6 +179,14 @@ const EventDetails = () => {
                         <img src={`http://127.0.0.1:8000${image}`} alt={`Event Image ${index + 1}`} />
                       </div>
                     ))}
+                   {Array.isArray(event.videos) && ( 
+                    event.videos.map((video, index) => (
+                      <div key={index} className="swiper-slide">
+                        <video controls style={{ width:"100%" }}>
+                          <source src={`http://127.0.0.1:8000/${video}`} type="video/mp4" />
+                        </video>
+                      </div>
+                    )))}
                   </div>
                   <div className="swiper-pagination"></div>
                 </div>
@@ -188,7 +196,6 @@ const EventDetails = () => {
                 </div>
               )}
             </div>
-
             {/* Event Information */}
             <div className="col-lg-4">
               <div className="portfolio-info" data-aos="fade-up" data-aos-delay="200">
@@ -231,7 +238,17 @@ const EventDetails = () => {
                     onChange={(e) => setSelectedDate(e.target.value)}
                   />
                 </div>
-
+                {/* Details Textarea */}
+                <div className="form-group mb-3">
+                  <label htmlFor="details">Additional Details:</label>
+                  <textarea
+                    id="details"
+                    className="form-control"
+                    placeholder="Enter any additional details or requests..."
+                    value={details}
+                    onChange={(e) => setDetails(e.target.value)}  // Update details state
+                  />
+                </div>
                 <button onClick={handleAddToCart} className="btn btn-primary">
                   Add to Cart
                 </button>

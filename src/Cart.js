@@ -50,6 +50,7 @@ const Cart = () => {
                   <div>
                     <h5>{item.name}</h5>
                     <p>Date: {new Date(item.selectedDate).toLocaleString()}</p>
+                    <p>Details: {item.details}</p> {/* Display the details field */}
                   </div>
                   <div>
                     <p>Price: ${item.price}</p>
@@ -64,7 +65,7 @@ const Cart = () => {
               <h4>Total Price: ${totalPrice.toFixed(2)}</h4>
             </div>
 
-            <button className="btn btn-success" onClick={handleCheckout}>Proceed to Checkout</button>
+            <button className="btn btn-primary" onClick={handleCheckout}>Proceed to Checkout</button>
           </>
         ) : (
           <p>Your cart is empty. <Link to="/">Go to events</Link></p>
