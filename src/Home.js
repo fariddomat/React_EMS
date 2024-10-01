@@ -54,7 +54,8 @@ const Home = () => {
               <div className="col-lg-8">
                 <h2>Welcome to EMS</h2>
                 <p>Your go-to platform for hosting and managing events, bringing businesses and audiences together.</p>
-                <a href="/about" className="btn-get-started">Get Started</a>
+                <Link to={`/about`} className="btn-get-started">Get Started</Link>
+
               </div>
             </div>
           </div>
@@ -85,7 +86,7 @@ const Home = () => {
                   <li><i className="bi bi-check-circle"></i> <span>Connect with your target audience through custom-designed events.</span></li>
                   <li><i className="bi bi-check-circle"></i> <span>Our platform is built to enhance user experience and promote engagement.</span></li>
                 </ul>
-                <a href="/about" className="read-more"><span>Read More</span><i className="bi bi-arrow-right"></i></a>
+                <Link to={`/about`} className="read-more"><span>Read More</span> <i className="bi bi-arrow-right"></i></Link>
               </div>
             </div>
           </div>

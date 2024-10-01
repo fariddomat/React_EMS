@@ -15,6 +15,8 @@ const BookingPage = () => {
   const [events, setEvents] = useState([]); // To hold associated events
   const navigate = useNavigate();
 
+  const [minDate, setMinDate] = useState('');
+
   useEffect(() => {
     AOS.init(); // Initialize AOS
 
@@ -23,6 +25,19 @@ const BookingPage = () => {
       .then((response) => {
         setPackageDetails(response.data);
         setEvents(response.data.events);
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+
+        // Format the date as YYYY-MM-DDTHH:MM (required for datetime-local input)
+        const year = tomorrow.getFullYear();
+        const month = String(tomorrow.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const day = String(tomorrow.getDate()).padStart(2, '0');
+        const hours = String(tomorrow.getHours()).padStart(2, '0');
+        const minutes = String(tomorrow.getMinutes()).padStart(2, '0');
+
+        // Set the minimum date to tomorrow's date at the current time
+        setMinDate(`${year}-${month}-${day}T${hours}:${minutes}`);
       })
       .catch((error) => {
         setError('Error fetching package details');
@@ -47,7 +62,7 @@ const BookingPage = () => {
     });
   };
 
-  
+
 
   return (
     <section id="bookings" className="bookings section mt-5">
@@ -106,26 +121,27 @@ const BookingPage = () => {
                 className="form-control"
                 value={bookingDate}
                 onChange={(e) => setBookingDate(e.target.value)}
+                min={minDate} // Set the minimum date
               />
               {error && <div className="alert alert-danger mt-3">{error}</div>}
               <button className="btn btn-primary mt-3" onClick={handleBooking}>Confirm Booking</button>
             </>
           )}
         </div>
-       {/* Message about invoice options */}
-       <div className="mt-4">
-              <p>You can choose to send us the invoice via <strong>WhatsApp</strong> or <strong>Email</strong>.</p>
-              <p>Alternatively, you can proceed with PayPal:</p>
-              {/* Display PayPal button */}
-              <button className="btn btn-light border border-primary" disabled>
-                <img 
-                  src="https://www.paypalobjects.com/webstatic/icon/pp258.png" 
-                  alt="PayPal"
-                  style={{ width: '90px', height: 'auto', marginRight: '10px' }}
-                />
-                Pay with PayPal
-              </button>
-            </div>
+        {/* Message about invoice options */}
+        <div className="mt-4">
+          <p>You can choose to send us the invoice via <strong>WhatsApp</strong> or <strong>Email</strong>.</p>
+          <p>Alternatively, you can proceed with PayPal:</p>
+          {/* Display PayPal button */}
+          <button className="btn btn-light border border-primary" disabled>
+            <img
+              src="https://www.paypalobjects.com/webstatic/icon/pp258.png"
+              alt="PayPal"
+              style={{ width: '90px', height: 'auto', marginRight: '10px' }}
+            />
+            Pay with PayPal
+          </button>
+        </div>
       </div>
     </section>
   );

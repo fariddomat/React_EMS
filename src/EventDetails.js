@@ -21,6 +21,7 @@ const EventDetails = () => {
   const token = localStorage.getItem('token');
   const [details, setDetails] = useState('');  // State to hold additional details
   const navigate = useNavigate();
+  const [minDate, setMinDate] = useState('');
 
   useEffect(() => {
     api.get(`/events/${id}`, {
@@ -33,6 +34,19 @@ const EventDetails = () => {
         setLoading(false);
 
         fetchSuggestedEvents();
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+    
+        // Format the date as YYYY-MM-DDTHH:MM (required for datetime-local input)
+        const year = tomorrow.getFullYear();
+        const month = String(tomorrow.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const day = String(tomorrow.getDate()).padStart(2, '0');
+        const hours = String(tomorrow.getHours()).padStart(2, '0');
+        const minutes = String(tomorrow.getMinutes()).padStart(2, '0');
+    
+        // Set the minimum date to tomorrow's date at the current time
+        setMinDate(`${year}-${month}-${day}T${hours}:${minutes}`);
         new Swiper('.swiper-container', {
           loop: true,
           autoplay: {
@@ -236,6 +250,7 @@ const EventDetails = () => {
                     className="form-control"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
+                    min={minDate}
                   />
                 </div>
                 {/* Details Textarea */}
