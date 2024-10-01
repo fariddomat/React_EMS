@@ -112,6 +112,20 @@ const BookingPage = () => {
             </>
           )}
         </div>
+       {/* Message about invoice options */}
+       <div className="mt-4">
+              <p>You can choose to send us the invoice via <strong>WhatsApp</strong> or <strong>Email</strong>.</p>
+              <p>Alternatively, you can proceed with PayPal:</p>
+              {/* Display PayPal button */}
+              <button className="btn btn-light border border-primary" disabled>
+                <img 
+                  src="https://www.paypalobjects.com/webstatic/icon/pp258.png" 
+                  alt="PayPal"
+                  style={{ width: '90px', height: 'auto', marginRight: '10px' }}
+                />
+                Pay with PayPal
+              </button>
+            </div>
       </div>
     </section>
   );
